@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0b12" />
+  <title>AuraStar — Zodiac + Crypto | All Our Stars Align</title>
+  <meta name="description" content="AuraStar unifies zodiac identity with crypto utility—when all our stars align." />
+  <meta property="og:title" content="AuraStar — Zodiac + Crypto" />
+  <meta property="og:description" content="Aurora Star embodies all of us with the zodiac combined with crypto—when all our stars align." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/0b0b12/ffffff&text=AuraStar" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    :root{
+      --bg:#07070d;
+      --panel:#0d0d16;
+      --text:#e9e9f3;
+      --muted:#b7b7cf;
+      --line:rgba(255,255,255,.10);
+      --glow: rgba(160,120,255,.28);
+      --accent1:#a67cff;
+      --accent2:#66e3ff;
+      --ok:#43f08a;
+      --warn:#ffcc66;
+      --bad:#ff6b8a;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1100px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background:
+        radial-gradient(900px 600px at 18% 12%, rgba(166,124,255,.22), transparent 60%),
+        radial-gradient(900px 600px at 80% 18%, rgba(102,227,255,.18), transparent 60%),
+        radial-gradient(1200px 800px at 50% 100%, rgba(255,255,255,.05), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background: linear-gradient(to bottom, rgba(7,7,13,.86), rgba(7,7,13,.55));
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 55%),
+        linear-gradient(135deg, rgba(166,124,255,.95), rgba(102,227,255,.85));
+      box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 18px 55px rgba(166,124,255,.22);
+    }
+    .brand .name{font-weight:760; letter-spacing:.2px}
+    .brand .tag{color:var(--muted); font-size:12px; margin-top:2px}
+    .navlinks{
+      display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end;
+      font-size:14px;
+    }
+    .navlinks a{
+      text-decoration:none; color:var(--muted);
+      padding:8px 10px; border-radius:12px;
+      border:1px solid transparent;
+    }
+    .navlinks a:hover{color:var(--text); border-color:rgba(255,255,255,.12); background:rgba(255,255,255,.04)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      border-radius:14px;
+      padding:11px 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      text-decoration:none;
+      cursor:pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,.24);
+    }
+    .btn:hover{border-color:rgba(255,255,255,.22); background: rgba(255,255,255,.07)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(166,124,255,.95), rgba(102,227,255,.85));
+      color:#0b0b12;
+      border-color: transparent;
+      font-weight:750;
+    }
+    .btn.primary:hover{filter:saturate(1.08) brightness(1.03)}
+    .hero{
+      padding:64px 0 22px;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .heroGrid{grid-template-columns:1fr}
+      .navlinks{display:none}
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      box-shadow: var(--shadow);
+    }
+    .heroCard{
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+    }
+    .heroCard:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 360px at 15% 20%, rgba(166,124,255,.30), transparent 55%),
+        radial-gradient(520px 320px at 85% 25%, rgba(102,227,255,.22), transparent 55%);
+      filter: blur(2px);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .heroCard > *{position:relative}
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.22);
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:14px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.6), rgba(166,124,255,1));
+      box-shadow: 0 0 0 3px rgba(166,124,255,.18);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:44px;
+      line-height:1.05;
+      letter-spacing:-.6px;
+    }
+    @media (max-width: 520px){ h1{font-size:36px} }
+    .sub{
+      margin:0 0 18px;
+      color:rgba(233,233,243,.88);
+      font-size:16px;
+      line-height:1.6;
+      max-width:56ch;
+    }
+    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px}
+    .mini{
+      margin-top:18px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      color:var(--muted); font-size:13px;
+    }
+    .pill{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.20);
+      padding:8px 10px; border-radius:999px;
+    }
+    .sideCard{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .metric{
+      padding:14px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+    }
+    .metric .label{color:var(--muted); font-size:12px}
+    .metric .value{font-size:16px; margin-top:6px; font-weight:720}
+    .metric .note{color:rgba(233,233,243,.78); font-size:13px; margin-top:6px; line-height:1.45}
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      margin:18px 0 0;
+    }
+    @media (max-width: 900px){ .grid3{grid-template-columns:1fr} }
+    .feature{
+      padding:18px;
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      min-height:140px;
+    }
+    .feature h3{margin:0 0 8px; font-size:16px}
+    .feature p{margin:0; color:rgba(233,233,243,.78); line-height:1.55; font-size:14px}
+    section{padding:28px 0}
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px; flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .sectionHead h2{margin:0; font-size:22px; letter-spacing:-.3px}
+    .sectionHead .desc{margin:0; color:var(--muted); max-width:70ch; line-height:1.55}
+    .panel{
+      padding:18px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      box-shadow: 0 18px 60px rgba(0,0,0,.22);
+    }
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 900px){ .twoCol{grid-template-columns:1fr} }
+    .list{margin:0; padding:0; list-style:none; display:grid; gap:10px}
+    .li{
+      padding:14px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .li b{display:block; margin-bottom:6px}
+    .li span{color:rgba(233,233,243,.78); line-height:1.5; font-size:14px}
+    .roadmap{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+    }
+    @media (max-width: 1000px){ .roadmap{grid-template-columns:1fr 1fr} }
+    @media (max-width: 560px){ .roadmap{grid-template-columns:1fr} }
+    .phase{
+      padding:14px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      position:relative;
+      overflow:hidden;
+    }
+    .phase:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(280px 150px at 20% 25%, rgba(166,124,255,.18), transparent 60%);
+      pointer-events:none;
+    }
+    .phase > *{position:relative}
+    .phase .p{color:var(--muted); font-size:12px; letter-spacing:.25px}
+    .phase h4{margin:6px 0 8px; font-size:15px}
+    .phase ul{margin:0; padding-left:18px; color:rgba(233,233,243,.78); font-size:13px; line-height:1.5}
+    .faq details{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:12px 14px;
+    }
+    .faq details + details{margin-top:10px}
+    summary{cursor:pointer; font-weight:650}
+    summary::marker{color:rgba(255,255,255,.25)}
+    .answer{color:rgba(233,233,243,.78); line-height:1.6; font-size:14px; margin-top:8px}
+    .formRow{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    @media (max-width: 700px){ .formRow{grid-template-columns:1fr} }
+    input, textarea{
+      width:100%;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.22);
+      padding:12px 12px;
+      color:var(--text);
+      outline:none;
+      font-family:var(--sans);
+      font-size:14px;
+    }
+    textarea{min-height:120px; resize:vertical}
+    input:focus, textarea:focus{border-color:rgba(102,227,255,.45); box-shadow: 0 0 0 4px rgba(102,227,255,.12)}
+    .fineprint{color:rgba(233,233,243,.62); font-size:12px; line-height:1.5}
+    footer{
+      padding:26px 0 40px;
+      border-top:1px solid var(--line);
+      margin-top:26px;
+      color:rgba(233,233,243,.70);
+    }
+    .footGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+    }
+    @media (max-width: 900px){ .footGrid{grid-template-columns:1fr} }
+    .mono{font-family:var(--mono)}
+    .hr{height:1px; background:var(--line); margin:14px 0}
+    .toast{
+      position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(10px);
+      color:rgba(233,233,243,.92);
+      font-size:13px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.38);
+      display:none;
+      z-index:999;
+      max-width: calc(100vw - 22px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="AuraStar Home">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <div class="name">AuraStar</div>
+            <div class="tag">Zodiac + Crypto • All our stars align</div>
+          </div>
+        </a>
+        <div class="navlinks">
+          <a href="#vision">Vision</a>
+          <a href="#utility">Utility</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a class="btn primary" href="#contact">Get Updates</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+    <div class="wrap">
+      <section class="hero">
+        <div class="heroGrid">
+          <div class="card heroCard">
+            <div class="kicker"><span class="dot"></span><span>Positioning: identity layer for crypto communities</span></div>
+            <h1>AuraStar aligns zodiac identity with crypto utility.</h1>
+            <p class="sub">
+              Aurora Star embodies all of us with the zodiac combined with crypto—when all our stars align.
+              Built to be fast, transparent, and community-driven.
+            </p>
+            <div class="actions">
+              <a class="btn primary" href="#vision">Explore the Vision</a>
+              <button class="btn" id="copyClaim">Copy Ownership Claim</button>
+              <button class="btn" id="copyPitch">Copy 1-line Pitch</button>
+            </div>
+            <div class="mini">
+              <span class="pill">Mobile-first</span>
+              <span class="pill">Investor-ready narrative</span>
+              <span class="pill">Deployable today</span>
+            </div>
+
+            <div class="grid3">
+              <div class="feature">
+                <h3>Zodiac-native community</h3>
+                <p>Turns shared archetypes into participation loops: missions, badges, and culture—without forcing complex UX.</p>
+              </div>
+              <div class="feature">
+                <h3>Utility-first roadmap</h3>
+                <p>Start with a clean brand and a working web funnel, then ship token + ecosystem features in phases.</p>
+              </div>
+              <div class="feature">
+                <h3>Trust via clarity</h3>
+                <p>Simple language, visible ownership claims, and public documentation from day one.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card sideCard">
+            <div class="metric">
+              <div class="label">Status</div>
+              <div class="value">Phase 1: Web + Brand Launch</div>
+              <div class="note">This page is your front door. Next steps: docs, socials, token plan, and compliance-safe messaging.</div>
+            </div>
+            <div class="metric">
+              <div class="label">Primary CTA</div>
+              <div class="value">Email capture + contact</div>
+              <div class="note">Build a list before anything else. Distribution is the moat.</div>
+            </div>
+            <div class="metric">
+              <div class="label">Founder attribution</div>
+              <div class="value mono" id="founderName">Sebastian McKain Jackson</div>
+              <div class="note">If you want a different display name format, change it once below in the HTML.</div>
+            </div>
+            <div class="metric">
+              <div class="label">Quick links</div>
+              <div class="value" style="display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn" href="#roadmap">Roadmap</a>
+                <a class="btn" href="#faq">FAQ</a>
+                <a class="btn" href="#contact">Contact</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="vision">
+        <div class="sectionHead">
+          <h2>Vision</h2>
+          <p class="desc">AuraStar positions the zodiac as a cultural operating system for crypto—identity, belonging, and repeatable engagement.</p>
+        </div>
+        <div class="panel twoCol">
+          <ul class="list">
+            <li class="li">
+              <b>North Star</b>
+              <span>Create a community that feels personal—where identity drives participation and retention.</span>
+            </li>
+            <li class="li">
+              <b>Design principle</b>
+              <span>Keep the experience simple: clarity, credibility, and momentum beats complexity.</span>
+            </li>
+            <li class="li">
+              <b>Go-to-market</b>
+              <span>Start with a clean brand + web funnel, then scale into product features that reinforce the narrative.</span>
+            </li>
+          </ul>
+          <ul class="list">
+            <li class="li">
+              <b>What AuraStar is not</b>
+              <span>No hype-only positioning. No vague promises. Everything ships in phases with visible outputs.</span>
+            </li>
+            <li class="li">
+              <b>What success looks like</b>
+              <span>A repeatable ecosystem: content → community → utility → growth loops across the zodiac.</span>
+            </li>
+            <li class="li">
+              <b>Execution focus</b>
+              <span>Distribution first, product second, financialization last. That order reduces risk and increases leverage.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="utility">
+        <div class="sectionHead">
+          <h2>Utility</h2>
+          <p class="desc">Practical outcomes you can build toward without overcommitting early.</p>
+        </div>
+        <div class="panel">
+          <div class="twoCol">
+            <div class="li">
+              <b>Community utility</b>
+              <span>Sign-based channels, weekly activations, quests, and recognition systems that drive repeat participation.</span>
+            </div>
+            <div class="li">
+              <b>Product utility</b>
+              <span>Member area, gated content, and optional wallet-connect later—only after baseline traction.</span>
+            </div>
+            <div class="li">
+              <b>Economic utility</b>
+              <span>Token mechanics come after the brand and funnel prove demand. This reduces launch risk.</span>
+            </div>
+            <div class="li">
+              <b>Creator utility</b>
+              <span>Templates and kits so creators can publish “sign packs” and plug into AuraStar distribution.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="roadmap">
+        <div class="sectionHead">
+          <h2>Roadmap</h2>
+          <p class="desc">A phased delivery model that prioritizes credibility, distribution, and ship velocity.</p>
+        </div>
+        <div class="panel">
+          <div class="roadmap">
+            <div class="phase">
+              <div class="p">PHASE 1</div>
+              <h4>Brand + Web Launch</h4>
+              <ul>
+                <li>Landing page live</li>
+                <li>Email capture</li>
+                <li>Public docs stub</li>
+              </ul>
+            </div>
+            <div class="phase">
+              <div class="p">PHASE 2</div>
+              <h4>Content Engine</h4>
+              <ul>
+                <li>Zodiac content calendar</li>
+                <li>Community channels</li>
+                <li>Lead magnets</li>
+              </ul>
+            </div>
+            <div class="phase">
+              <div class="p">PHASE 3</div>
+              <h4>Utility Modules</h4>
+              <ul>
+                <li>Member area (optional)</li>
+                <li>Quests + badges</li>
+                <li>Partnership outreach</li>
+              </ul>
+            </div>
+            <div class="phase">
+              <div class="p">PHASE 4</div>
+              <h4>Token Readiness</h4>
+              <ul>
+                <li>Tokenomics + docs</li>
+                <li>Compliance review</li>
+                <li>Launch checklist</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq">
+        <div class="sectionHead">
+          <h2>FAQ</h2>
+          <p class="desc">Direct answers. No fluff.</p>
+        </div>
+        <div class="panel faq">
+          <details>
+            <summary>Is AuraStar live?</summary>
+            <div class="answer">This site is live once you deploy it. Token and additional modules are staged by roadmap phase.</div>
+          </details>
+          <details>
+            <summary>Is this financial advice?</summary>
+            <div class="answer">No. This site is informational and brand-level. Anything token-related should be reviewed for compliance before launch.</div>
+          </details>
+          <details>
+            <summary>What do I do next after the site is live?</summary>
+            <div class="answer">Lock in your domain, publish a simple docs page, create a weekly content cadence, and grow your email list. Distribution first.</div>
+          </details>
+          <details>
+            <summary>Can I add my wallet address and socials?</summary>
+            <div class="answer">Yes. Replace the placeholders in the footer/contact section. Keep it clean and verifiable.</div>
+          </details>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="sectionHead">
+          <h2>Contact / Updates</h2>
+          <p class="desc">This form uses a mailto fallback by default (no backend needed). You can upgrade to a form service later.</p>
+        </div>
+        <div class="panel">
+          <form id="contactForm">
+            <div class="formRow">
+              <div>
+                <label class="fineprint">Name</label>
+                <input name="name" placeholder="Your name" required />
+              </div>
+              <div>
+                <label class="fineprint">Email</label>
+                <input name="email" placeholder="you@email.com" type="email" required />
+              </div>
+            </div>
+            <div style="margin-top:10px">
+              <label class="fineprint">Message</label>
+              <textarea name="message" placeholder="What are you looking to build / collaborate on?" required></textarea>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; align-items:center;">
+              <button class="btn primary" type="submit">Send</button>
+              <button class="btn" type="button" id="copyEmail">Copy Contact Email</button>
+              <span class="fineprint">No backend. Ships today.</span>
+            </div>
+            <div class="hr"></div>
+            <div class="fineprint">
+              By contacting AuraStar, you agree this is not financial advice and that any future token-related material may change as compliance and execution evolve.
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <footer>
+        <div class="wrap">
+          <div class="footGrid">
+            <div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <div class="logo" style="width:28px;height:28px;border-radius:10px"></div>
+                <div>
+                  <div style="font-weight:750">AuraStar</div>
+                  <div class="fineprint">Zodiac + Crypto — When all our stars align.</div>
+                </div>
+              </div>
+
+              <div class="hr"></div>
+
+              <div class="fineprint">
+                <b>Ownership / Attribution:</b>
+                <span class="mono" id="claimText">
+                  AuraStar is created, owned, and branded by Sebastian McKain Jackson.
+                </span>
+              </div>
+
+              <div style="margin-top:10px" class="fineprint">
+                <b>Disclaimer:</b> Informational site only. No guarantees. No financial advice. Do your own research.
+              </div>
+            </div>
+
+            <div class="panel" style="padding:14px; border-radius:18px;">
+              <div class="fineprint"><b>Operational checklist</b></div>
+              <ul class="fineprint" style="margin:10px 0 0; padding-left:18px; line-height:1.55;">
+                <li>Deploy site to Cloudflare Pages</li>
+                <li>Add your domain (optional)</li>
+                <li>Add socials (X/Telegram/Discord)</li>
+                <li>Publish docs stub (whitepaper-lite)</li>
+                <li>Launch weekly content cadence</li>
+              </ul>
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn" id="copyDeploy">Copy Deploy Steps</button>
+                <a class="btn" href="#top">Back to top</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="hr"></div>
+          <div class="fineprint">© <span id="yr"></span> AuraStar. All rights reserved.</div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ====== CONFIG: edit these values only ======
+    const CONTACT_EMAIL = "mccain_jackson@yahoo.com"; // <-- replace with your real email
+    const FOUNDER_NAME = "Sebastian McKain Jackson";
+    const ONE_LINE_PITCH = "AuraStar aligns zodiac identity with crypto utility—when all our stars align.";
+    const OWNERSHIP_CLAIM = "AuraStar is created, owned, and branded by Sebastian McKain Jackson.";
+
+    // ====== UTIL ======
+    const $ = (id) => document.getElementById(id);
+    function toast(msg){
+      const t = $("toast");
+      t.textContent = msg;
+      t.style.display = "block";
+      clearTimeout(window.__toastT);
+      window.__toastT = setTimeout(()=>{ t.style.display="none"; }, 2200);
+    }
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        toast("Copied.");
+      }catch(e){
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        toast("Copied.");
+      }
+    }
+
+    // ====== INIT ======
+    $("yr").textContent = new Date().getFullYear();
+    $("founderName").textContent = FOUNDER_NAME;
+    $("claimText").textContent = OWNERSHIP_CLAIM;
+
+    $("copyClaim").addEventListener("click", ()=> copyText(OWNERSHIP_CLAIM));
+    $("copyPitch").addEventListener("click", ()=> copyText(ONE_LINE_PITCH));
+    $("copyEmail").addEventListener("click", ()=> copyText(CONTACT_EMAIL));
+
+    $("copyDeploy").addEventListener("click", ()=>{
+      const steps = [
+        "Deploy (Cloudflare Pages):",
+        "1) Create GitHub repo and add index.html",
+        "2) Cloudflare Dashboard → Pages → Create a project",
+        "3) Connect GitHub repo aurastar-website",
+        "4) Framework preset: None",
+        "5) Build command: (leave blank)",
+        "6) Output directory: /",
+        "7) Save and Deploy → copy the live URL"
+      ].join("\\n");
+      copyText(steps);
+    });
+
+    // Mailto form fallback (no backend)
+    $("contactForm").addEventListener("submit", (e)=>{
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const name = fd.get("name");
+      const email = fd.get("email");
+      const msg = fd.get("message");
+      const subject = encodeURIComponent("AuraStar inquiry from " + name);
+      const body = encodeURIComponent(
+        "Name: " + name + "\\n" +
+        "Email: " + email + "\\n\\n" +
+        msg + "\\n\\n" +
+        "---\\nSent via AuraStar landing page."
+      );
+      const href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+      window.location.href = href;
+      toast("Opening email client...");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
